@@ -148,12 +148,11 @@ PRODUITS = {
                     "shampoing-curls-pour-cheveux-boucles-300-ml"),
     "sh-cur-1000": P("Shampoing Curl Hair Care", "1 000 ml", 1780,
                      "shampoing-curls-pour-cheveux-boucles-1000-ml"),
-    # Confirmé par AF Lix Lox : le masque Curl n'existe qu'en 1 000 ml, au
-    # tarif de la grille suisse. La seule photographie disponible est celle du
-    # pot de 500 ml, dont l'étiquette porte la contenance en clair : on ne
-    # l'emploie pas ici. Déposer un visuel du 1 000 ml dans assets/img/p/ et
-    # remplacer `None` par son nom de fichier.
-    "mas-cur-1000": P("Masque Curl Hair Care", "1 000 ml", 1450, None),
+    # Confirmé par AF Lix Lox : le masque Curl n'existe qu'en 500 ml. La
+    # grille suisse le donne en 1 000 ml — c'est sa contenance qui est erronée,
+    # pas son tarif, qui s'aligne sur les autres masques 500 ml.
+    "mas-cur-500": P("Masque Curl Hair Care", "500 ml", 1450,
+                     "masque-cheveux-boucles-curls-hair-care-500-ml"),
     "flu-cur-250": P("Fluide boucles Curl", "250 ml", 2190,
                      "fluide-boucles-soin-boucles-250-ml"),
 
@@ -313,7 +312,7 @@ SECTIONS = [
             {"nom": "Frequent Hair Care", "fonction": "Lavages fréquents", "note": "",
              "refs": ["sh-fre-1000", "ap-fre-1000", "spr-fre-250", "bid-freq"]},
             {"nom": "Curl Hair Care", "fonction": "Cheveux bouclés", "note": "",
-             "refs": ["sh-cur-300", "sh-cur-1000", "mas-cur-1000", "flu-cur-250"]},
+             "refs": ["sh-cur-300", "sh-cur-1000", "mas-cur-500", "flu-cur-250"]},
             {"nom": "Greasy Hair Care", "fonction": "Cheveux gras", "note": "",
              "refs": ["sh-gre-1000"]},
             {"nom": "Dandruff Hair Care", "fonction": "Anti-pelliculaire", "note": "",

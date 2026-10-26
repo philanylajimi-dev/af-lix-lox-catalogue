@@ -1,25 +1,9 @@
-# Points à confirmer avant publication
+# Points ouverts et décisions prises
 
-## 1. Un visuel manque — Masque Curl Hair Care 1 000 ml
+Le catalogue est complet : **les 53 références ont toutes un prix et une
+photographie**, et toutes sont commandables. Aucun montant n'a été inventé.
 
-Confirmé par AF Lix Lox : **le masque Curl n'existe qu'en 1 000 ml**. La
-référence est au catalogue dans ce format, au tarif de la grille suisse —
-14,50 CHF HT — et elle est commandable.
-
-Reste sa photographie. La seule disponible est celle du pot de 500 ml
-(`masque-cheveux-boucles-curls-hair-care-500-ml.webp`), dont l'étiquette porte
-« 500 ml » en clair, lisible sur la carte. Montrer un format qui n'est pas celui
-qu'on commande tromperait le salon : la carte affiche donc la vignette
-« Visuel à venir ».
-
-**Pour la combler** : déposer une photographie du pot de 1 000 ml dans
-`assets/img/p/`, puis remplacer `None` par son nom de fichier (sans `.webp`)
-sur la ligne `"mas-cur-1000"` de `build/catalogue.py`, et régénérer.
-
-Si vous préférez le pot de 500 ml en attendant, dites-le : c'est la même
-ligne à changer.
-
-## 2. Tarifs
+## 1. Tarifs
 
 Confirmé par AF Lix Lox : **les prix sont hors taxes**. La mention « HT »
 figure sur chacun des 53 prix, sur le prix au tube des deux gammes de
@@ -29,10 +13,24 @@ nuancier, sur le total du panier et sur la ligne de total du message WhatsApp.
 Chaque référence est payante à l'unité : aucune promotion, aucun palier,
 aucune quantité offerte, aucun minimum de commande.
 
+## 2. Un écart relevé avec la grille suisse
+
+| | Grille suisse | Catalogue |
+|---|---|---|
+| Masque Curl Hair Care | 1 000 ml · 14,50 CHF | **500 ml · 14,50 CHF** |
+
+Confirmé par AF Lix Lox : le masque Curl n'existe **qu'en 500 ml**. C'est donc
+la contenance portée par la grille qui est erronée, pas son tarif — lequel
+s'aligne d'ailleurs sur tous les autres masques 500 ml de la grille (Dry,
+Color, Fluidaliss, également à 14,50 CHF), quand les 1 000 ml y sont à
+20,90 CHF.
+
+À corriger sur la grille papier à la prochaine impression.
+
 ## 3. Références de la grille suisse volontairement écartées
 
-La grille tarifaire comporte des produits et des formats absents du catalogue
-Laly Cosmetics. Conformément à la consigne, aucun n'a été ajouté :
+La grille comporte des produits et des formats absents du catalogue Laly
+Cosmetics. Conformément à la consigne, aucun n'a été ajouté :
 
 | Grille suisse | Motif |
 |---|---|
@@ -67,8 +65,9 @@ deux gammes. Vérifié : 12 tubes Profesia = 102,00 · 24 = 204,00 · 48 = 408,0
 
 ## 5. Photographies à valider (11)
 
-Reprises du catalogue français, où elles portent la même réserve : le visuel est
-plausible mais n'a pas été confirmé référence par référence.
+Seul point encore ouvert. Ces visuels sont repris du catalogue français, où ils
+portent la même réserve : plausibles, mais non confirmés référence par
+référence.
 
 - Frequent Hair Care 10 L
 - Crème volumisante Dry 200 ml
@@ -80,8 +79,7 @@ plausible mais n'a pas été confirmé référence par référence.
 - Gel coiffant 500 ml
 - Poudre volume 10 g
 
-La liste complète, avec celle des références sans photographie, ressort à
-chaque génération : `python3 build/generate.py`.
+La liste ressort à chaque génération : `python3 build/generate.py`.
 
 ## 6. Ce qui n'a pas été touché
 
