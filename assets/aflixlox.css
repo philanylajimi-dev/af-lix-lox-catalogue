@@ -979,9 +979,10 @@ table { border-collapse: collapse; width: 100%; }
    jamais la vedette. */
 .prix__d { font-size: 0.8125rem; letter-spacing: 0.03em; }
 
-.prix__u {
+.prix__ht {
   margin-left: 0.25rem;
   font-family: var(--ui);
+  /* « HT » engage le prix : il doit rester lisible, jamais sous 11 px. */
   font-size: 0.6875rem;
   font-weight: 500;
   letter-spacing: 0.12em;

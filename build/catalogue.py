@@ -56,6 +56,7 @@ MARQUE = "AF Lix Lox"
 BASELINE = "Professional Cosmetics"
 PAYS = "Suisse"
 DEVISE = "CHF"
+TAXES = "HT"      # tarifs professionnels hors taxes
 
 # Le numéro ne paraît nulle part sur la page : il ne sert qu'à construire le
 # lien wa.me du bouton de commande.
@@ -147,12 +148,12 @@ PRODUITS = {
                     "shampoing-curls-pour-cheveux-boucles-300-ml"),
     "sh-cur-1000": P("Shampoing Curl Hair Care", "1 000 ml", 1780,
                      "shampoing-curls-pour-cheveux-boucles-1000-ml"),
-    # La grille suisse donne un masque Curl en 1 000 ml ; le catalogue ne
-    # propose que le 500 ml. Tant que le tarif du 500 ml n'est pas confirmé,
-    # la référence paraît sans prix et reste non commandable.
-    "mas-cur-500": P("Masque Curl Hair Care", "500 ml", None,
-                     "masque-cheveux-boucles-curls-hair-care-500-ml",
-                     attente="Tarif suisse à confirmer"),
+    # Confirmé par AF Lix Lox : le masque Curl n'existe qu'en 1 000 ml, au
+    # tarif de la grille suisse. La seule photographie disponible est celle du
+    # pot de 500 ml, dont l'étiquette porte la contenance en clair : on ne
+    # l'emploie pas ici. Déposer un visuel du 1 000 ml dans assets/img/p/ et
+    # remplacer `None` par son nom de fichier.
+    "mas-cur-1000": P("Masque Curl Hair Care", "1 000 ml", 1450, None),
     "flu-cur-250": P("Fluide boucles Curl", "250 ml", 2190,
                      "fluide-boucles-soin-boucles-250-ml"),
 
@@ -312,7 +313,7 @@ SECTIONS = [
             {"nom": "Frequent Hair Care", "fonction": "Lavages fréquents", "note": "",
              "refs": ["sh-fre-1000", "ap-fre-1000", "spr-fre-250", "bid-freq"]},
             {"nom": "Curl Hair Care", "fonction": "Cheveux bouclés", "note": "",
-             "refs": ["sh-cur-300", "sh-cur-1000", "mas-cur-500", "flu-cur-250"]},
+             "refs": ["sh-cur-300", "sh-cur-1000", "mas-cur-1000", "flu-cur-250"]},
             {"nom": "Greasy Hair Care", "fonction": "Cheveux gras", "note": "",
              "refs": ["sh-gre-1000"]},
             {"nom": "Dandruff Hair Care", "fonction": "Anti-pelliculaire", "note": "",

@@ -1,40 +1,33 @@
 # Points à confirmer avant publication
 
-## 1. Un tarif manque — Masque Curl Hair Care 500 ml
+## 1. Un visuel manque — Masque Curl Hair Care 1 000 ml
 
-La grille tarifaire suisse donne, pour la gamme Curl :
+Confirmé par AF Lix Lox : **le masque Curl n'existe qu'en 1 000 ml**. La
+référence est au catalogue dans ce format, au tarif de la grille suisse —
+14,50 CHF HT — et elle est commandable.
 
-| Produit | Format | Prix |
-|---|---|---|
-| Masque | **1 000 ml** | 14,50 CHF |
+Reste sa photographie. La seule disponible est celle du pot de 500 ml
+(`masque-cheveux-boucles-curls-hair-care-500-ml.webp`), dont l'étiquette porte
+« 500 ml » en clair, lisible sur la carte. Montrer un format qui n'est pas celui
+qu'on commande tromperait le salon : la carte affiche donc la vignette
+« Visuel à venir ».
 
-Or le catalogue ne propose le masque Curl **qu'en 500 ml** — c'est le format de
-Laly Cosmetics, et la consigne est de ne pas changer les formats.
+**Pour la combler** : déposer une photographie du pot de 1 000 ml dans
+`assets/img/p/`, puis remplacer `None` par son nom de fichier (sans `.webp`)
+sur la ligne `"mas-cur-1000"` de `build/catalogue.py`, et régénérer.
 
-Les deux lectures possibles s'excluent :
+Si vous préférez le pot de 500 ml en attendant, dites-le : c'est la même
+ligne à changer.
 
-- la grille vise bien un 1 000 ml, absent du catalogue : le 500 ml n'a alors
-  aucun prix suisse ;
-- la grille s'est trompée de contenance et vise le 500 ml à 14,50 CHF — ce que
-  rendrait plausible le fait que **tous** les autres masques 500 ml de la
-  grille sont à 14,50 CHF (Dry, Color, Fluidaliss), quand les 1 000 ml sont à
-  20,90 CHF.
+## 2. Tarifs
 
-Rien n'a été inventé. La référence paraît au catalogue, à sa place dans la
-gamme, avec la mention « Tarif à confirmer » et « Nous consulter » ; elle n'est
-pas commandable. **Un mot de votre part suffit à la débloquer** : il n'y a
-qu'une ligne à changer dans `build/catalogue.py`.
+Confirmé par AF Lix Lox : **les prix sont hors taxes**. La mention « HT »
+figure sur chacun des 53 prix, sur le prix au tube des deux gammes de
+coloration, dans l'ouverture (« Prix en CHF HT »), sur le bilan de chaque
+nuancier, sur le total du panier et sur la ligne de total du message WhatsApp.
 
-## 2. TVA — ni HT ni TTC
-
-Le catalogue n'indique rien : il affiche « Prix en CHF ». L'ancien catalogue
-suisse AF Lix Lox laissait déjà la question ouverte, faute d'information.
-
-Le catalogue français, lui, affiche « HT » partout, parce que la mention y
-était confirmée.
-
-À trancher. Si les tarifs suisses sont hors TVA, la mention se rajoute en une
-fois dans `build/generate.py`.
+Chaque référence est payante à l'unité : aucune promotion, aucun palier,
+aucune quantité offerte, aucun minimum de commande.
 
 ## 3. Références de la grille suisse volontairement écartées
 
@@ -46,16 +39,15 @@ Laly Cosmetics. Conformément à la consigne, aucun n'a été ajouté :
 | Gamme **Fluidaliss** entière (shampoing 300 / 1 000 ml, masque 500 / 1 000 ml) | gamme absente du catalogue |
 | Activateur 150 ml | seul le 1 000 ml est au catalogue |
 | Shampoing Greasy 300 ml | seul le 1 000 ml est au catalogue |
-| Masque Curl 1 000 ml | seul le 500 ml est au catalogue — voir point 1 |
 | Kit Botox 45 × 2 ml · 139,00 | référence absente du catalogue |
 | Nano Repair : shampoing préparateur 500 g · 40,00 et traitement 500 g · 170,00 | références absentes du catalogue |
 | Permanente Extra Wave 500 ml · 30,00 | seul le neutralisant est au catalogue |
 | Shampoing No Yellow 500 ml | absent du catalogue : aucune confirmation à demander |
 
 Les poudres décolorantes gardent leur fiche unique à trois puissances, aux prix
-de la grille : 7 tons 27,00 · 9 tons 32,00 · 10 tons 39,00 CHF. Les couleurs de
-sachet (bleue, grise, rose) sont celles de la grille ; la fiche n'affiche que le
-pouvoir éclaircissant, comme dans le catalogue français.
+de la grille : 7 tons 27,00 · 9 tons 32,00 · 10 tons 39,00 CHF HT. Les couleurs
+de sachet (bleue, grise, rose) sont celles de la grille ; la fiche n'affiche que
+le pouvoir éclaircissant, comme dans le catalogue français.
 
 ## 4. Colorations
 
@@ -63,15 +55,15 @@ Les deux gammes appartiennent à Profesia Hair.
 
 | Gamme | Tube 100 ml | Nuances |
 |---|---|---|
-| Profesia Hair | 8,50 CHF | 70 |
-| Ekstra Color sans ammoniaque | 8,90 CHF | 41 |
+| Profesia Hair | 8,50 CHF HT | 70 |
+| Ekstra Color sans ammoniaque | 8,90 CHF HT | 41 |
 
 Ces prix remplacent les 10,40 et 10,90 CHF de l'ancien catalogue suisse.
 
 Le calcul est une simple multiplication, y compris lorsque le salon mélange les
 deux gammes. Vérifié : 12 tubes Profesia = 102,00 · 24 = 204,00 · 48 = 408,00 ·
-50 = 425,00 CHF. Ekstra : 12 = 106,80 · 24 = 213,60 · 48 = 427,20 · 50 =
-445,00 CHF.
+50 = 425,00 CHF HT. Ekstra : 12 = 106,80 · 24 = 213,60 · 48 = 427,20 ·
+50 = 445,00 CHF HT.
 
 ## 5. Photographies à valider (11)
 
@@ -88,8 +80,8 @@ plausible mais n'a pas été confirmé référence par référence.
 - Gel coiffant 500 ml
 - Poudre volume 10 g
 
-La liste complète ressort à chaque génération :
-`python3 build/generate.py`.
+La liste complète, avec celle des références sans photographie, ressort à
+chaque génération : `python3 build/generate.py`.
 
 ## 6. Ce qui n'a pas été touché
 

@@ -2,8 +2,8 @@
 
 Catalogue de prix destiné aux salons de coiffure suisses, partagé par WhatsApp.
 Page statique : pas de compte, pas de paiement en ligne. Le salon compose sa
-commande, le catalogue calcule le montant en francs suisses, et le bouton
-WhatsApp ouvre une conversation avec le message déjà rédigé.
+commande, le catalogue calcule le montant en francs suisses hors taxes, et le
+bouton WhatsApp ouvre une conversation avec le message déjà rédigé.
 
 Projet autonome. Il reprend l'organisation, les photographies, les produits et
 le fonctionnement du catalogue français Laly Cosmetics ; ses prix, son identité
@@ -45,7 +45,7 @@ Tout se passe dans `build/catalogue.py`, puis on régénère.
 
 - **Un prix** — la valeur est en **centimes de franc suisse**, entière : `1780`
   vaut 17,80 CHF. Tous les calculs se font en centimes, jamais en virgule
-  flottante.
+  flottante. Les tarifs sont hors taxes : `TAXES` porte la mention affichée.
 - **Un prix non confirmé** — laisser `None` et renseigner `attente="…"`. La
   carte affiche « Tarif à confirmer » puis « Nous consulter », et la référence
   reste hors du panier. Ne jamais inventer un montant.

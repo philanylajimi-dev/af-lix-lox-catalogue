@@ -105,6 +105,12 @@
     return nombre(cents) + ' ' + DONNEES.devise;
   }
 
+  /* Les tarifs sont hors taxes : le message de commande le dit une fois, sur
+     la ligne qui engage, plutôt qu'à chaque sous-total. */
+  function montantTaxes(cents) {
+    return nombre(cents) + ' ' + DONNEES.devise + ' ' + DONNEES.taxes;
+  }
+
   function pluriel(n, mot) {
     return n + ' ' + mot + (n > 1 ? 's' : '');
   }
@@ -466,7 +472,7 @@
 
     blocs.innerHTML = morceaux.join('');
     vide.hidden = morceaux.length > 0;
-    panier.querySelector('[data-total]').textContent = montant(totalCents());
+    panier.querySelector('[data-total]').textContent = montantTaxes(totalCents());
   }
 
   /* ---- Message WhatsApp ---------------------------------------------- */
@@ -513,7 +519,7 @@
     });
 
     L.push('');
-    L.push('TOTAL : ' + montant(totalCents()));
+    L.push('TOTAL ' + DONNEES.taxes + ' : ' + montant(totalCents()));
     if (etat.livraison) {
       L.push('');
       L.push('Date de livraison souhaitée : ' + dateFr(etat.livraison));

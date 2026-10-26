@@ -61,7 +61,8 @@ def prix(p, grand=False):
         return '<p class="prix prix--attente">Tarif à confirmer</p>'
     lg = " prix--lg" if grand else ""
     return (f'<p class="prix{lg}"><span class="prix__v">{francs(p["prix"])}</span>'
-            f'<span class="prix__d">{C.DEVISE}</span></p>')
+            f'<span class="prix__d">{C.DEVISE}</span>'
+            f'<span class="prix__ht">{C.TAXES}</span></p>')
 
 
 def typo(doc):
@@ -146,7 +147,7 @@ def bloc_ouverture():
         Choisissez vos références, vos nuances et vos quantités, puis envoyez
         votre commande sur WhatsApp.</p>
     </div>
-    <p class="ouverture__meta"><span>Prix en CHF</span><span class="ouverture__sep" aria-hidden="true"></span><span>{C.PAYS}</span></p>
+    <p class="ouverture__meta"><span>Prix en {C.DEVISE} {C.TAXES}</span><span class="ouverture__sep" aria-hidden="true"></span><span>{C.PAYS}</span></p>
   </div>
 
   <div class="accroche">
@@ -225,7 +226,7 @@ def carte_variantes(v, groupe):
   <div class="carte__corps">
     <p class="carte__fmt">{e(v['contenance'])}</p>
     <h4 class="carte__nom">{e(v['nom'])}</h4>
-    <p class="prix"><span class="prix__v" data-var-prix>{francs(C.PRODUITS[premier]['prix'])}</span><span class="prix__d">{C.DEVISE}</span></p>
+    <p class="prix"><span class="prix__v" data-var-prix>{francs(C.PRODUITS[premier]['prix'])}</span><span class="prix__d">{C.DEVISE}</span><span class="prix__ht">{C.TAXES}</span></p>
     <div class="carte__variante">
       <label for="{ident}">{e(v['label'])}</label>
       <select id="{ident}" data-var-select>{options}</select>
@@ -307,7 +308,7 @@ def bloc_colorations():
       <h3 class="gamme__nom">{e(col['nom'])}</h3>
       <p class="gamme__sous">{e(col['sous_titre'])}</p>
       <p class="gamme__meta">{e(col['contenance'])}<span class="gamme__sep" aria-hidden="true"></span>{total_nuances} nuances</p>
-      <p class="prix prix--lg"><span class="prix__v">{francs(col['prix'])}</span><span class="prix__d">{C.DEVISE}</span><span class="prix__u">le tube</span></p>
+      <p class="prix prix--lg"><span class="prix__v">{francs(col['prix'])}</span><span class="prix__d">{C.DEVISE}</span><span class="prix__ht">{C.TAXES} le tube</span></p>
     </div>
   </div>
 
@@ -333,7 +334,7 @@ def bloc_colorations():
         <h4 class="bilan__titre">Votre sélection</h4>
         <p class="bilan__note" data-bilan-note></p>
       </div>
-      <p class="bilan__montant"><span>Montant</span><span class="bilan__v"><span data-bilan-montant>0,00</span> {C.DEVISE}</span></p>
+      <p class="bilan__montant"><span>Montant {C.TAXES}</span><span class="bilan__v"><span data-bilan-montant>0,00</span> {C.DEVISE}</span></p>
     </div>
   </div>
 </article>""")
@@ -402,6 +403,7 @@ def donnees_json():
         "gammes": gammes,
         "marque": C.MARQUE,
         "devise": C.DEVISE,
+        "taxes": C.TAXES,
         "tel": C.TELEPHONE_WHATSAPP,
     }
 
@@ -426,11 +428,11 @@ def rendre():
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{C.MARQUE} — Catalogue professionnel</title>
-<meta name="description" content="Catalogue professionnel {C.MARQUE} : colorations, soins, technique et gamme homme aux tarifs professionnels en francs suisses. Commande directe par WhatsApp.">
+<meta name="description" content="Catalogue professionnel {C.MARQUE} : colorations, soins, technique et gamme homme aux tarifs professionnels en francs suisses hors taxes. Commande directe par WhatsApp.">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#171514">
 <meta property="og:title" content="{C.MARQUE} — Catalogue professionnel">
-<meta property="og:description" content="Tarifs professionnels en francs suisses pour les salons de coiffure. Colorations, soins, technique et gamme homme.">
+<meta property="og:description" content="Tarifs professionnels hors taxes en francs suisses pour les salons de coiffure. Colorations, soins, technique et gamme homme.">
 <meta property="og:type" content="website">
 <meta property="og:image" content="assets/img/aflixlox-icone.png">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
@@ -485,9 +487,9 @@ def rendre():
     </div>
     <div class="pied__col">
       <h2>Tarifs</h2>
-      <p>Prix professionnels en francs suisses, par unité. Chaque référence est
-        payante : le catalogue ne comporte ni promotion, ni palier, ni minimum
-        de commande.</p>
+      <p>Prix professionnels en francs suisses hors taxes, par unité. Chaque
+        référence est payante : le catalogue ne comporte ni promotion, ni
+        palier, ni minimum de commande.</p>
       <p class="pied__maj">Catalogue à jour au {maj}</p>
     </div>
   </div>
@@ -514,7 +516,7 @@ def rendre():
   </div>
 
   <div class="panier__pied">
-    <p class="total"><span>Total</span><span class="total__v" data-total>0,00 {C.DEVISE}</span></p>
+    <p class="total"><span>Total {C.TAXES}</span><span class="total__v" data-total>0,00 {C.DEVISE}</span></p>
 
     <div class="champ">
       <label for="salon">Nom du salon</label>
