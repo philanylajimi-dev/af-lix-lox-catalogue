@@ -492,10 +492,10 @@
     return p.length === 3 ? p[2] + '/' + p[1] + '/' + p[0] : iso;
   }
 
-  /* Le message reprend le récapitulatif : un bloc par référence, avec sa
-     quantité, son prix unitaire et son sous-total ; un bloc par gamme de
-     coloration, avec le détail des nuances, le nombre total de tubes et le
-     sous-total. Rien n'y est calculé qui ne le soit déjà à l'écran. */
+  /* Même présentation que le catalogue Laly Cosmetics France : la commande
+     énumère ce qui est commandé, sans prix unitaire ni sous-total, et un seul
+     montant l'engage — le total hors taxes. Rien n'y est calculé qui ne le
+     soit déjà à l'écran. */
   function message() {
     var L = [];
     L.push('Bonjour ' + DONNEES.marque + ',');
@@ -507,18 +507,22 @@
       L.push('');
     }
     L.push('COMMANDE :');
+    L.push('');
 
+    // Produits : le nom et le format sur la première ligne, la quantité sur
+    // la seconde. Le prix se dit une fois pour toutes, sur le total.
     Object.keys(etat.produits).forEach(function (ref) {
       var p = DONNEES.produits[ref];
-      var q = etat.produits[ref];
+      L.push(p.nom + ' – ' + p.fmt);
+      L.push(pluriel(etat.produits[ref], 'unité'));
       L.push('');
-      L.push(p.nom + ' ' + p.fmt);
-      L.push(q + ' × ' + montant(p.prix) + ' = ' + montant(p.prix * q));
     });
 
-    /* Une gamme tient en un bloc : ses nuances avec leur quantité, puis une
-       seule ligne de récapitulatif. Les gammes restent séparées, chacune avec
-       ses propres tubes offerts : rien ne se mélange d'une gamme à l'autre. */
+    /* Colorations : un en-tête de gamme, les nuances avec leur quantité —
+       tubes offerts compris — puis une seule ligne de récapitulation. Les
+       tubes offerts n'étant rattachés à aucune nuance, c'est là qu'ils se
+       disent. Les gammes restent séparées, chacune comptant les siens : rien
+       ne se mélange d'une gamme à l'autre. Les deux tiennent en 100 ml. */
     Object.keys(DONNEES.gammes).forEach(function (gamme) {
       var g = DONNEES.gammes[gamme];
       var table = etat.achats[gamme];
@@ -526,24 +530,26 @@
       if (!codes.length) return;
       var total = tubes(gamme);
       var dus = offerts(gamme);
-      L.push('');
+
       L.push(g.nom + ' – Colorations 100 ml');
+      L.push('');
+
       codes.forEach(function (code) {
         L.push('Nuance ' + code + ' : ' + pluriel(table[code], 'tube'));
+        L.push('');
       });
-      L.push('');
+
       L.push(pluriel(total, 'tube')
         + (dus > 0 ? ' (dont ' + pluriel(dus, 'offert') + ')' : ''));
-      L.push('Total ' + DONNEES.taxes + ' : ' + montant(g.prix * total));
+      L.push('');
     });
 
-    L.push('');
     L.push('TOTAL ' + DONNEES.taxes + ' : ' + montant(totalCents()));
-    if (etat.livraison) {
-      L.push('');
-      L.push('Date de livraison souhaitée : ' + dateFr(etat.livraison));
-    }
     L.push('');
+    if (etat.livraison) {
+      L.push('Date de livraison souhaitée : ' + dateFr(etat.livraison));
+      L.push('');
+    }
     L.push('Merci de me confirmer la disponibilité et la livraison.');
 
     return L.join('\n');
