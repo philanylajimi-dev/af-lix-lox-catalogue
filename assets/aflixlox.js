@@ -76,6 +76,15 @@
     return somme(etat.achats[gamme]);
   }
 
+  /* Tubes offerts sur une gamme. Le catalogue suisse ne comporte aucune
+     promotion : chaque tube sélectionné est payant, donc aucun n'est offert et
+     le récapitulatif n'affiche jamais de parenthèse. Un palier introduit plus
+     tard se compterait ici — et devrait alors se répercuter sur totalCents(),
+     qui facture aujourd'hui tous les tubes. */
+  function offerts(gamme) {
+    return 0;
+  }
+
   /** Total en centimes : aucun flottant n'intervient. */
   function totalCents() {
     var t = 0;
@@ -483,8 +492,9 @@
     return p.length === 3 ? p[2] + '/' + p[1] + '/' + p[0] : iso;
   }
 
-  /* Le message reprend le récapitulatif ligne pour ligne : un bloc par
-     référence et par nuance, avec sa quantité, son prix unitaire et son
+  /* Le message reprend le récapitulatif : un bloc par référence, avec sa
+     quantité, son prix unitaire et son sous-total ; un bloc par gamme de
+     coloration, avec le détail des nuances, le nombre total de tubes et le
      sous-total. Rien n'y est calculé qui ne le soit déjà à l'écran. */
   function message() {
     var L = [];
@@ -506,16 +516,25 @@
       L.push(q + ' × ' + montant(p.prix) + ' = ' + montant(p.prix * q));
     });
 
+    /* Une gamme tient en un bloc : ses nuances avec leur quantité, puis une
+       seule ligne de récapitulatif. Les gammes restent séparées, chacune avec
+       ses propres tubes offerts : rien ne se mélange d'une gamme à l'autre. */
     Object.keys(DONNEES.gammes).forEach(function (gamme) {
       var g = DONNEES.gammes[gamme];
       var table = etat.achats[gamme];
-      Object.keys(table).forEach(function (code) {
-        var q = table[code];
-        L.push('');
-        L.push(g.nom + ' – Nuance ' + code);
-        L.push(pluriel(q, 'tube') + ' × ' + montant(g.prix)
-          + ' = ' + montant(g.prix * q));
+      var codes = Object.keys(table);
+      if (!codes.length) return;
+      var total = tubes(gamme);
+      var dus = offerts(gamme);
+      L.push('');
+      L.push(g.nom + ' – Colorations 100 ml');
+      codes.forEach(function (code) {
+        L.push('Nuance ' + code + ' : ' + pluriel(table[code], 'tube'));
       });
+      L.push('');
+      L.push(pluriel(total, 'tube')
+        + (dus > 0 ? ' (dont ' + pluriel(dus, 'offert') + ')' : ''));
+      L.push('Total ' + DONNEES.taxes + ' : ' + montant(g.prix * total));
     });
 
     L.push('');
