@@ -76,15 +76,6 @@
     return somme(etat.achats[gamme]);
   }
 
-  /* Tubes offerts sur une gamme. Le catalogue suisse ne comporte aucune
-     promotion : chaque tube sélectionné est payant, donc aucun n'est offert et
-     le récapitulatif n'affiche jamais de parenthèse. Un palier introduit plus
-     tard se compterait ici — et devrait alors se répercuter sur totalCents(),
-     qui facture aujourd'hui tous les tubes. */
-  function offerts(gamme) {
-    return 0;
-  }
-
   /** Total en centimes : aucun flottant n'intervient. */
   function totalCents() {
     var t = 0;
@@ -518,18 +509,16 @@
       L.push('');
     });
 
-    /* Colorations : un en-tête de gamme, les nuances avec leur quantité —
-       tubes offerts compris — puis une seule ligne de récapitulation. Les
-       tubes offerts n'étant rattachés à aucune nuance, c'est là qu'ils se
-       disent. Les gammes restent séparées, chacune comptant les siens : rien
-       ne se mélange d'une gamme à l'autre. Les deux tiennent en 100 ml. */
+    /* Colorations : un en-tête de gamme, ses nuances avec leur quantité, puis
+       le nombre total de tubes. Les gammes restent séparées, chacune comptant
+       les siens. AF Lix Lox ne fait aucune offre : aucun tube n'est offert, et
+       le récapitulatif ne dit donc que le total. Les deux tiennent en 100 ml. */
     Object.keys(DONNEES.gammes).forEach(function (gamme) {
       var g = DONNEES.gammes[gamme];
       var table = etat.achats[gamme];
       var codes = Object.keys(table);
       if (!codes.length) return;
       var total = tubes(gamme);
-      var dus = offerts(gamme);
 
       L.push(g.nom + ' – Colorations 100 ml');
       L.push('');
@@ -539,8 +528,7 @@
         L.push('');
       });
 
-      L.push(pluriel(total, 'tube')
-        + (dus > 0 ? ' (dont ' + pluriel(dus, 'offert') + ')' : ''));
+      L.push(pluriel(total, 'tube'));
       L.push('');
     });
 
